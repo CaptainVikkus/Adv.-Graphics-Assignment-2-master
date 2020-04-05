@@ -25,7 +25,7 @@ public:
 	DirectX::XMFLOAT3 GetPosition3f()const;
 	void SetPosition(float x, float y, float z);
 	void SetPosition(const DirectX::XMFLOAT3& v);
-	
+
 	// Get camera basis vectors.
 	DirectX::XMVECTOR GetRight()const;
 	DirectX::XMFLOAT3 GetRight3f()const;
@@ -46,7 +46,7 @@ public:
 	float GetNearWindowHeight()const;
 	float GetFarWindowWidth()const;
 	float GetFarWindowHeight()const;
-	
+
 	// Set frustum.
 	void SetLens(float fovY, float aspect, float zn, float zf);
 
@@ -65,6 +65,7 @@ public:
 	void Strafe(float d);
 	void Walk(float d);
 	void Pedestal(float d);
+	void Dolly(float d);
 
 	// Rotate the camera.
 	void Pitch(float angle);

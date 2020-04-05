@@ -121,8 +121,8 @@ void Camera::SetLens(float fovY, float aspect, float zn, float zf)
 	mNearZ = zn;
 	mFarZ = zf;
 
-	mNearWindowHeight = 2.0f * mNearZ * tanf( 0.5f*mFovY );
-	mFarWindowHeight  = 2.0f * mFarZ * tanf( 0.5f*mFovY );
+	mNearWindowHeight = 2.0f * mNearZ * tanf(0.5f*mFovY);
+	mFarWindowHeight = 2.0f * mFarZ * tanf(0.5f*mFovY);
 
 	XMMATRIX P = XMMatrixPerspectiveFovLH(mFovY, mAspect, mNearZ, mFarZ);
 	XMStoreFloat4x4(&mProj, P);
@@ -210,13 +210,28 @@ void Camera::Pedestal(float d)
 	mViewDirty = true;
 }
 
+void Camera::Dolly(float d)
+{
+	XMVECTOR s = XMVectorReplicate(d);
+
+	XMFLOAT3 f = XMFLOAT3(mLook.x, 0, mLook.z);
+	XMVECTOR dolly = XMLoadFloat3(&f);
+	dolly = XMVector3Normalize(dolly);
+
+	XMVECTOR p = XMLoadFloat3(&mPosition);
+
+	XMStoreFloat3(&mPosition, XMVectorMultiplyAdd(s, dolly, p));
+
+	mViewDirty = true;
+}
+
 void Camera::Pitch(float angle)
 {
 	// Rotate up and look vector about the right vector.
 
 	XMMATRIX R = XMMatrixRotationAxis(XMLoadFloat3(&mRight), angle);
 
-	XMStoreFloat3(&mUp,   XMVector3TransformNormal(XMLoadFloat3(&mUp), R));
+	XMStoreFloat3(&mUp, XMVector3TransformNormal(XMLoadFloat3(&mUp), R));
 	XMStoreFloat3(&mLook, XMVector3TransformNormal(XMLoadFloat3(&mLook), R));
 
 	mViewDirty = true;
@@ -228,7 +243,7 @@ void Camera::RotateY(float angle)
 
 	XMMATRIX R = XMMatrixRotationY(angle);
 
-	XMStoreFloat3(&mRight,   XMVector3TransformNormal(XMLoadFloat3(&mRight), R));
+	XMStoreFloat3(&mRight, XMVector3TransformNormal(XMLoadFloat3(&mRight), R));
 	XMStoreFloat3(&mUp, XMVector3TransformNormal(XMLoadFloat3(&mUp), R));
 	XMStoreFloat3(&mLook, XMVector3TransformNormal(XMLoadFloat3(&mLook), R));
 
@@ -250,7 +265,7 @@ void Camera::Roll(float angle)
 
 void Camera::UpdateViewMatrix()
 {
-	if(mViewDirty)
+	if (mViewDirty)
 	{
 		XMVECTOR R = XMLoadFloat3(&mRight);
 		XMVECTOR U = XMLoadFloat3(&mUp);
