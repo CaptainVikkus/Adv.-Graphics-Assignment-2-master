@@ -1430,6 +1430,71 @@ void TreeBillboardsApp::BuildRenderItems()
 
 	mRitemLayer[(int)RenderLayer::Opaque].push_back(gridRitem.get());
 
+	auto pathRitem = std::make_unique<RenderItem>();
+	XMStoreFloat4x4(&pathRitem->World, XMMatrixScaling(0.05f, 0.1f, 0.15f) * XMMatrixTranslation(0.0f, 0.05f, -10.5f));
+	XMStoreFloat4x4(&pathRitem->TexTransform, XMMatrixScaling(4.0f, 8.0f, 1.0f));
+	pathRitem->ObjCBIndex = objCBIndex++;
+	pathRitem->Mat = mMaterials["stone"].get();
+	pathRitem->Geo = mGeometries["landGeo"].get();
+	pathRitem->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	pathRitem->IndexCount = pathRitem->Geo->DrawArgs["grid"].IndexCount;
+	pathRitem->StartIndexLocation = pathRitem->Geo->DrawArgs["grid"].StartIndexLocation;
+	pathRitem->BaseVertexLocation = pathRitem->Geo->DrawArgs["grid"].BaseVertexLocation;
+
+	mRitemLayer[(int)RenderLayer::Opaque].push_back(pathRitem.get());
+
+	auto pathRitem2 = std::make_unique<RenderItem>();
+	XMStoreFloat4x4(&pathRitem2->World, XMMatrixScaling(0.035f, 0.1f, 0.21f) * XMMatrixRotationY(-XM_PI / 2.0f) * XMMatrixTranslation(0.0f, 0.05f, -5.0f));
+	XMStoreFloat4x4(&pathRitem2->TexTransform, XMMatrixScaling(2.0f, 8.0f, 1.0f));
+	pathRitem2->ObjCBIndex = objCBIndex++;
+	pathRitem2->Mat = mMaterials["stone"].get();
+	pathRitem2->Geo = mGeometries["landGeo"].get();
+	pathRitem2->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	pathRitem2->IndexCount = pathRitem2->Geo->DrawArgs["grid"].IndexCount;
+	pathRitem2->StartIndexLocation = pathRitem2->Geo->DrawArgs["grid"].StartIndexLocation;
+	pathRitem2->BaseVertexLocation = pathRitem2->Geo->DrawArgs["grid"].BaseVertexLocation;
+
+	mRitemLayer[(int)RenderLayer::Opaque].push_back(pathRitem2.get());
+
+	auto pathRitem3 = std::make_unique<RenderItem>();
+	XMStoreFloat4x4(&pathRitem3->World, XMMatrixScaling(0.035f, 0.1f, 0.13f) * XMMatrixTranslation(5.3f, 0.05f, 0.0f));
+	XMStoreFloat4x4(&pathRitem3->TexTransform, XMMatrixScaling(4.0f, 4.0f, 1.0f));
+	pathRitem3->ObjCBIndex = objCBIndex++;
+	pathRitem3->Mat = mMaterials["stone"].get();
+	pathRitem3->Geo = mGeometries["landGeo"].get();
+	pathRitem3->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	pathRitem3->IndexCount = pathRitem3->Geo->DrawArgs["grid"].IndexCount;
+	pathRitem3->StartIndexLocation = pathRitem3->Geo->DrawArgs["grid"].StartIndexLocation;
+	pathRitem3->BaseVertexLocation = pathRitem3->Geo->DrawArgs["grid"].BaseVertexLocation;
+
+	mRitemLayer[(int)RenderLayer::Opaque].push_back(pathRitem3.get());
+
+	auto pathRitem4 = std::make_unique<RenderItem>();
+	XMStoreFloat4x4(&pathRitem4->World, XMMatrixScaling(0.035f, 0.1f, 0.13f) * XMMatrixTranslation(-5.3f, 0.05f, 0.0f));
+	XMStoreFloat4x4(&pathRitem4->TexTransform, XMMatrixScaling(4.0f, 4.0f, 1.0f));
+	pathRitem4->ObjCBIndex = objCBIndex++;
+	pathRitem4->Mat = mMaterials["stone"].get();
+	pathRitem4->Geo = mGeometries["landGeo"].get();
+	pathRitem4->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	pathRitem4->IndexCount = pathRitem4->Geo->DrawArgs["grid"].IndexCount;
+	pathRitem4->StartIndexLocation = pathRitem4->Geo->DrawArgs["grid"].StartIndexLocation;
+	pathRitem4->BaseVertexLocation = pathRitem4->Geo->DrawArgs["grid"].BaseVertexLocation;
+
+	mRitemLayer[(int)RenderLayer::Opaque].push_back(pathRitem4.get());
+
+	auto pathRitem5 = std::make_unique<RenderItem>();
+	XMStoreFloat4x4(&pathRitem5->World, XMMatrixScaling(0.035f, 0.1f, 0.21f) * XMMatrixRotationY(-XM_PI / 2.0f) * XMMatrixTranslation(0.0f, 0.05f, 5.0f));
+	XMStoreFloat4x4(&pathRitem5->TexTransform, XMMatrixScaling(2.0f, 8.0f, 1.0f));
+	pathRitem5->ObjCBIndex = objCBIndex++;
+	pathRitem5->Mat = mMaterials["stone"].get();
+	pathRitem5->Geo = mGeometries["landGeo"].get();
+	pathRitem5->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	pathRitem5->IndexCount = pathRitem5->Geo->DrawArgs["grid"].IndexCount;
+	pathRitem5->StartIndexLocation = pathRitem5->Geo->DrawArgs["grid"].StartIndexLocation;
+	pathRitem5->BaseVertexLocation = pathRitem5->Geo->DrawArgs["grid"].BaseVertexLocation;
+
+	mRitemLayer[(int)RenderLayer::Opaque].push_back(pathRitem5.get());
+
 	// Assignment 2 City RenderItems
 	/*auto boxRitem = std::make_unique<RenderItem>();
 	XMStoreFloat4x4(&boxRitem->World, XMMatrixTranslation(3.0f, 2.0f, -9.0f));
@@ -1444,7 +1509,8 @@ void TreeBillboardsApp::BuildRenderItems()
 	//mRitemLayer[(int)RenderLayer::AlphaTested].push_back(boxRitem.get());
 
 	auto domeRitem = std::make_unique<RenderItem>();
-	domeRitem->World = MathHelper::Identity4x4();
+	//domeRitem->World = MathHelper::Identity4x4();
+	XMStoreFloat4x4(&domeRitem->World, XMMatrixTranslation(0.0f, -0.25f, 0.0f));
 	domeRitem->ObjCBIndex = objCBIndex++;
 	domeRitem->Mat = mMaterials["tile"].get();
 	domeRitem->Geo = mGeometries["CityGeo"].get();
@@ -1520,7 +1586,7 @@ void TreeBillboardsApp::BuildRenderItems()
 	//-----Wedges-----//
 
 	auto wedgeRitem = std::make_unique<RenderItem>();
-	XMStoreFloat4x4(&wedgeRitem->World, XMMatrixScaling(4.0f, 4.0f, 10.0f) * XMMatrixRotationY(-XM_PI / 2.0f) * XMMatrixTranslation(4.5f, 0.5f, -7.5f));
+	XMStoreFloat4x4(&wedgeRitem->World, XMMatrixScaling(4.0f, 4.0f, 10.0f) * XMMatrixRotationY(-XM_PI / 2.0f) * XMMatrixTranslation(4.5f, 0.45f, -7.5f));
 	wedgeRitem->ObjCBIndex = objCBIndex++;
 	wedgeRitem->Mat = mMaterials["stone"].get();
 	wedgeRitem->Geo = mGeometries["CityGeo"].get();
@@ -1532,7 +1598,7 @@ void TreeBillboardsApp::BuildRenderItems()
 	mRitemLayer[(int)RenderLayer::AlphaTested].push_back(wedgeRitem.get());
 
 	auto wedge2Ritem = std::make_unique<RenderItem>();
-	XMStoreFloat4x4(&wedge2Ritem->World, XMMatrixScaling(4.0f, 4.0f, 10.0f) * XMMatrixRotationY(XM_PI / 2.0f) * XMMatrixTranslation(-4.5f, 0.5f, -7.5f));
+	XMStoreFloat4x4(&wedge2Ritem->World, XMMatrixScaling(4.0f, 4.0f, 10.0f) * XMMatrixRotationY(XM_PI / 2.0f) * XMMatrixTranslation(-4.5f, 0.45f, -7.5f));
 	wedge2Ritem->ObjCBIndex = objCBIndex++;
 	wedge2Ritem->Mat = mMaterials["stone"].get();
 	wedge2Ritem->Geo = mGeometries["CityGeo"].get();
@@ -1622,6 +1688,11 @@ void TreeBillboardsApp::BuildRenderItems()
 
 	mAllRitems.push_back(std::move(wavesRitem));
 	mAllRitems.push_back(std::move(gridRitem));
+	mAllRitems.push_back(std::move(pathRitem));
+	mAllRitems.push_back(std::move(pathRitem2));
+	mAllRitems.push_back(std::move(pathRitem3));
+	mAllRitems.push_back(std::move(pathRitem4));
+	mAllRitems.push_back(std::move(pathRitem5));
 	//	mAllRitems.push_back(std::move(boxRitem));
 	mAllRitems.push_back(std::move(domeRitem));
 	mAllRitems.push_back(std::move(box1Ritem));
